@@ -56,7 +56,8 @@ export class FormBuilderContainer extends Component {
       return;
     }
     if (initialForms.links !== undefined && initialForms.links.length > 0 && initialForms.links.find(link => link.rel === 'next') !== undefined) {
-      httpInterceptor.get(initialForms.links[0].uri)
+      const nextLink = initialForms.links[0].uri.replace("http:", "https:");
+      httpInterceptor.get(nextLink)
         .then((privileges) => this.collectAllForms(privileges, forms))
         .catch((error) => {
           this.showErrors(error);
